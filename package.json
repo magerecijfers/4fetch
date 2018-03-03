@@ -1,0 +1,20 @@
+{
+  "name": "4fetch",
+  "version": "1.0.0",
+  "description": "This program fetches all the images in a thread, and stores them in a folder with the threadID. (will change later)",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node main.js"
+  },
+  "author": "toast7355",
+  "license": "MIT",
+  "dependencies": {
+    "@types/node": "^9.4.5",
+    "colors": "^1.1.2",
+    "discord.js": "^11.3.0",
+    "download": "^6.2.5",
+    "jsdom": "^11.6.2",
+    "sleep": "^5.1.1"
+  }
+}
