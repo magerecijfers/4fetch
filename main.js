@@ -9,7 +9,7 @@ var board = "wg";
 var threadID = 7120187;
 
 // TODO: refactor, and remove spaghet
-function getPage() {
+    function getPage() {
     var url = "http://boards.4chan.org/" + board + "/thread/" + threadID;
     spawn.exec("wget " + url); // im sure there's a better way to do this. maybe with JSDOM?
 }
@@ -21,9 +21,9 @@ function isFileEmpty(_file) {
 }
 
 function renameList() {
-if(isFileEmpty(_file)) {
-    fs.rename("./" + threadID, "wpList.html", (err,data) => console.log(err, + "\n"+data));
-} 
+    if(isFileEmpty(_file)) {
+        fs.rename("./" + threadID, "wpList.html", (err,data) => console.log(err, + "\n"+data));
+    } 
 }
 
 getPage(); 
