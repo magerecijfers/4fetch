@@ -20,17 +20,10 @@ function isFileEmpty(_file) {
     else { return false; }
 }
 
-function renameList() {
-    if(isFileEmpty(_file)) {
-        fs.rename("./" + threadID, "wpList.html", (err,data) => console.log(err, + "\n"+data));
-    } 
-}
-
 getPage(); 
 sleep.sleep(4); // there's this weird issue with racing. fs.readFileSync() gets called before the page is actually downloaded.
 var _file = fs.readFileSync("./" + threadID, "utf8");
 sleep.sleep(4);
-renameList();
 var file = _file;
 const dom = new JSDOM(file);
 var images = dom.window.document.getElementsByClassName("fileThumb");
