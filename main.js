@@ -22,7 +22,7 @@ function isFileEmpty(_file) {
 
 getPage(); 
 sleep.sleep(4); // there's this weird issue with racing. fs.readFileSync() gets called before the page is actually downloaded.
-var _file = fs.readFileSync("./" + threadID, "utf8");
+var _file = fs.readFileSync("./" + threadID, "utf8"); // :)
 sleep.sleep(4);
 var file = _file;
 const dom = new JSDOM(file);
