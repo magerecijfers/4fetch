@@ -4,22 +4,14 @@ const os = require("os");
 const spawn = require("child_process");
 const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
-var colors = require("colors");
-var prompt = require('prompt');
+var prompt = require("prompt-sync-history")
 const readline = require('readline');
 var board = null;
 var threadID = null;
-var racelocked = true;
-prompt.get(['board', 'threadid'], function(err,result) {
-    console.log("Board: %s", result.board);
-    console.log("Thread Identifier: %s", result.threadid)
-    board = result.board;
-    threadID = result.threadid;
-    racelocked = false;
-})
+board = prompt("Board: ");
+threadID = prompt("Thread ID: ");
 // TODO: refactor, and remove spaghest
 // TODO: cleanup after downloading images
-
 function cleanup() {
     fs.unlink(threadID);
     return 0;
@@ -51,4 +43,4 @@ for(i = images.length-1;0 < i;i--) {
    // links[i] = images.item(i).toString();
    spawn.exec("cd images;wget " + images.item(i).toString().split("//")[1], (err, stdout) => console.log(stdout));
 }
-cleanup();
+// cleanup();
