@@ -13,7 +13,7 @@ var threadID = process.argv[3];
 // TODO: cleanup after downloading images
 function cleanup() {
     fs.unlink(threadID);
-    fs.unlink(threadID + ".1")
+   // fs.unlink(threadID + ".1")
     return 0;
 }
 
@@ -29,8 +29,8 @@ sleep.sleep(4);
 const dom = new JSDOM(file);
 var images = dom.window.document.getElementsByClassName("fileThumb");
 var links = new Array(images.length+1);
-for(i = images.length-1;0 < i;i--) {
-    spawn.exec("mkdir images");
-   spawn.exec("cd images;wget " + images.item(i).toString().split("//")[1], (err, stdout) => console.log(stdout));
+for(i = images.length-1, z=1;0 < i;i--,z++) {
+    console.log('[%d / %d] Downloading: %s', z, images.length, images.item(i).toString().split("//")[1])
+    spawn.exec("cd images;wget " + images.item(i).toString().split("//")[1], (err, stdout) => null);
 }
 cleanup();
