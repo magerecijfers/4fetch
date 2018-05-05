@@ -39,9 +39,6 @@ var images = dom.window.document.getElementsByClassName("fileThumb");
 var links = new Array(images.length+1);
 // console.log(images.item(3).toString());
 for(i = images.length-1;0 < i;i--) {
-   // console.log(images.item(i).toString());
-   // var incomp = images.item(i).toString().split("//")[1]
-   // links[i] = images.item(i).toString();
    spawn.exec("cd images;wget " + images.item(i).toString().split("//")[1], (err, stdout) => console.log(stdout));
 }
 // cleanup();
