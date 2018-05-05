@@ -6,8 +6,9 @@ const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
 var prompt = require("prompt-sync-history")
 const readline = require('readline');
-var board = null;
-var threadID = null;
+var board = process.argv[2];
+var threadID = process.argv[3];
+// console.log("Board: %s\nThread ID: %s", process.argv[2], process.argv[3])
 board = prompt("Board: ");
 threadID = prompt("Thread ID: ");
 // TODO: refactor, and remove spaghest
