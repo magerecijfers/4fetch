@@ -6,9 +6,7 @@ const board = process.argv[2];
 const threadID = process.argv[3];
 const m = require("./func.js");
 let flag = false;
-// TODO: refactor, and remove spaghet
-
- if(!board || !threadID) {
+if(!board || !threadID) {
     console.log("No board specified. Exiting.");
     console.log("Correct usage: ./node app.js board threadid")
     process.exit(1);
