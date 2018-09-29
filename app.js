@@ -1,19 +1,25 @@
 const fs = require("fs");
-const sleep = require("sleep");
 const spawn = require("child_process").exec;
 const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
 const board = process.argv[2];
 const threadID = process.argv[3];
 const m = require("./func.js");
+let flag = false;
 // TODO: refactor, and remove spaghet
-if(!board || !threadID) {
+
+ if(!board || !threadID) {
     console.log("No board specified. Exiting.");
     console.log("Correct usage: ./node app.js board threadid")
     process.exit(1);
 }
-m.getPage(); 
-sleep.sleep(1);
+
+if(fs.existsSync("./"+threadID)) {
+    fs.unlink();
+    flag = true; // Sets flag to true. getPage method will check if true, if true it will skip downloading the page. Making the application faster.
+    console.log("File already exists. Skipping.")
+}
+m.getPage(flag);  
 let file = fs.readFileSync("./" + threadID, "utf8");
 const dom = new JSDOM(file);
 let images = dom.window.document.getElementsByClassName("fileThumb");
@@ -24,4 +30,6 @@ for(i = images.length-1, z=1;0 < i;i--,z++) {
         return err;
     });
 }
-m.cleanup();
+
+fs.unlinkSync("./"+threadID);
+dom.window.close();
