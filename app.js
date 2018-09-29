@@ -6,6 +6,7 @@ const board = process.argv[2];
 const threadID = process.argv[3];
 const m = require("./func.js");
 let flag = false;
+// TODO: Make a graphical user interface with Electron.
 if (!board || !threadID) {
     console.log("No board specified. Exiting.");
     console.log("Correct usage: ./node app.js board threadid")
