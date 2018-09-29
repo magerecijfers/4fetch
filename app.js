@@ -9,7 +9,7 @@ const m = require("./func.js");
 // TODO: refactor, and remove spaghet
 if(!board || !threadID) {
     console.log("No board specified. Exiting.");
-    console.log("Correct usage: ./node main.js board threadid")
+    console.log("Correct usage: ./node app.js board threadid")
     process.exit(1);
 }
 m.getPage(); 
