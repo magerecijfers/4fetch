@@ -17,7 +17,7 @@ exports.getPage = function(flag) {
     } else {
     var url = "http://boards.4chan.org/" + board + "/thread/" + threadID;
     spawn("wget " + url);
-    sleep.sleep(1);
+    sleep(1);
     return 0;
     }
 }
