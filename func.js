@@ -3,7 +3,7 @@ const board = process.argv[2];
 const threadID = process.argv[3];
 const spawn = require("child_process").exec;
 const fs = require("fs");
-const sleep = require("sleep");
+const sleep = require("sleep").sleep();
 
 exports.cleanup = function() {
     fs.unlink(threadID);
