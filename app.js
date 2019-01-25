@@ -30,7 +30,7 @@ let images = dom.window.document.getElementsByClassName("fileThumb");
 for (i = images.length - 1, z = 1; 0 < i; i-- , z++) {
 
     console.log('[%d / %d] Downloading: %s', z, images.length-1, images.item(i).toString().split("//")[1])
-    spawn("cd images;wget " + images.item(i).toString().split("//")[1], (err, stdout, stderr) => function (err, stdout, stderr) {
+    spawn("cd images;wget " + images.item(i).toString().split("//")[1], (err, stdout, stderr) => (err, stdout, stderr) {
         console.log(err);
     });
 }
