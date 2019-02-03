@@ -1,18 +1,25 @@
-const fetch = require('node-fetch');
-const jsdom = require("jsdom");
-const { JSDOM } = jsdom;
+const fs = require('fs');
 const axios = require('axios');
-const board = process.argv[2];
-const threadID = process.argv[3];
+const download = require('download');
 
-if (!(board && threadID) == true) {
-    console.log("Correct usage node app.js [board] [threadID]");
-    process.exit(-1);
+async function getPageData(board, threadnumber, path) {
+    fs.mkdir(path, (err) => {
+        console.log(err);
+    })
+    const res = await axios.get(`http://a.4cdn.org/${board}/thread/${threadnumber}.json`);
+    let tim, ext;
+    for(i = 0;i < res.data.posts.length; i++) {
+        tim = m.data.posts[i].tim;
+        ext = m.data.posts[i].ext;
+        if(tim == undefined || ext == undefined) {
+            console.log("Skipped item %s, because of no image.", i);
+            continue;
+        }
+        console.log(`[%s / %s] Downloading: ${tim}${ext}`, i, m.data.posts.length);
+        await download(`http://i.4cdn.org/${board}/${tim}${ext}`).then(data => {
+            fs.writeFileSync(`img/${tim}${ext}`, data);
+        })
+    }
+    console.log("Done!")
 }
-fetch("http://www.4chan.org/" + board + "/" + threadID)
-.then((data) => {
-    data.text().then((f) => {
-        const dom = new JSDOM(f);
-        console.log(dom.window.document.documentElement.innerHTML);
-    });
-})
+getPageData("wg", 7354908);
