@@ -1,11 +1,26 @@
 const fs = require('fs');
 const axios = require('axios');
 const download = require('download');
+const board = process.argv[1];
+const threadnumber = process.argv[2];
+const path = process.argv[3];
+
+function validateInput(board, threadnumber, path) {
+    if((board != null && board != undefined) && (threadnumber != NaN && threadnumber != undefined)) {
+
+    } else {
+        console.log("Correct usage: node app.js [board] [threadnumber] [OPTIONAL: path]");
+        process.exit(-1);
+    }
+}
 
 async function getPageData(board, threadnumber, path) {
-    fs.mkdir(path, (err) => {
-        console.log(err);
-    })
+    if(process.argv[3] != undefined)
+    {
+        fs.mkdir(path, (err) => {
+            console.log(err);
+        })
+    }
     const res = await axios.get(`http://a.4cdn.org/${board}/thread/${threadnumber}.json`);
     let tim, ext;
     for(i = 0;i < res.data.posts.length; i++) {
@@ -22,4 +37,7 @@ async function getPageData(board, threadnumber, path) {
     }
     console.log("Done!")
 }
-getPageData("wg", 7354908);
+
+
+validateInput();
+getPageData(process.argv[1], process.argv[2], process.argv[3]);
